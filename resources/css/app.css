@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body::-webkit-scrollbar, #scroll-down::-webkit-scrollbar {
+    width: 5px;               /* ширина всей полосы прокрутки */
+}
+
+body::-webkit-scrollbar-track , #scroll-down::-webkit-scrollbar-track{
+    background: #2c3a4f;
+    width: 5px;
+    border-radius: 30px;  /* цвет зоны отслеживания */
+}
+
+body::-webkit-scrollbar-thumb , #scroll-down::-webkit-scrollbar-thumb{
+    background: #2563eb26;    /* цвет бегунка */
+    border-radius: 30px;
+    width: 5px; /* округлось бегунка */
+    border: 3px solid #2563eb26;  /* отступ вокруг бегунка */
+}
