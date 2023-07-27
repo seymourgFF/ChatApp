@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Events\MessageSent;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ChatController extends Controller
 {
@@ -74,9 +77,24 @@ class ChatController extends Controller
 
     public function sendLs(LsMessageFormRequest $request)
     {
+        $data = $request->validated();
+        if(!is_null($data['image'])){
+            $path = '/public/upload/' . \Auth::id() . '/';
+            $filename = $data['image']->getClientOriginalName();
+
+            if (! Storage::putFileAs($path, $data['image'], $filename, 'public')) {
+                Log::info('cant save image '. $path);
+            }else{
+                $fullUrl = Storage::url('upload/' . \Auth::id() . '/' . $filename);
+                $data['image'] = $fullUrl;
+                //$data['image'] = Storage::get($path.$data['image']);
+            }
+        }else{
+            $data['image'] = '';
+        }
         $message = $request->user()
             ->messagesLs()
-            ->create($request->validated());
+            ->create($data);
         broadcast(new LsMessageSent($request->user(), $message));
         return $message;
     }

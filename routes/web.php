@@ -36,12 +36,12 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(ChatController::class)->group(function (){
 
-    Route::get('/chat', 'index')->name('chat');
+    //Route::get('/chat', 'index')->name('chat');
     Route::get('/ls-chat/{user}', 'lsChat')->name('lsChat');
     Route::get('/users', 'users')->name('users');
-    Route::get('/messages', 'messages');
+    //Route::get('/messages', 'messages');
     Route::get('/ls-messages/{user}', 'lsMessages');
-    Route::post('/send', 'send');
+    //Route::post('/send', 'send');
     Route::post('/ls-send', 'sendLs');
 
 })->middleware(['auth', 'verified']);

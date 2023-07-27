@@ -8,6 +8,11 @@
                     <span class="px-4 py-2 rounded-lg inline-block"
                           :class="{'rounded-br-none bg-blue-600 text-white': message.user.id == user.id, 'rounded-bl-none bg-gray-300 text-gray-600': message.user.id != user.id}"
                     >
+                        <div v-if="message.image !=''">
+                            <a v-bind:href="message.image" data-lightbox="roadtrip">
+                        <img v-bind:src="message.image">
+                            </a>
+                        </div>
                         {{ message.message }}
                     </span>
                     <m :class="{'text-right': message.user.id == user.id}">{{message.user.name}}</m>
@@ -51,6 +56,7 @@ export default {
             .listen('LsMessageSent', (e) => {
                 messagesLs.value.push({
                     message: e.message.message,
+                    image: e.message.image,
                     user: e.user
                 });
             });

@@ -29,7 +29,11 @@ export default function useChatLs() {
     const addMessageLs = async (formLs) => {
         errorsLs.value = [];
         try {
-            await axios.post('/ls-send', formLs).then((response) => {
+            await axios.post('/ls-send', formLs, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then((response) => {
                 messagesLs.value.push(response.data)
                 /*showNotification({
                     top: 10,

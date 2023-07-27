@@ -24,7 +24,8 @@ class LsMessageFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'message' => ['required', 'string'],
+            'message' => ['nullable', 'string'],
+            'image' => ['nullable', 'mimes:jpg,jpeg,png,csv,txt,xlx,xls,pdf','max:3000'],
             'to_user_id' =>'integer'
         ];
     }

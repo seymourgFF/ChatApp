@@ -14,10 +14,8 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)
-            ->constrained()
-            ->cascadeOnDelete()
-            ->cascadeOnUpdate();
+            $table->unsignedBigInteger('user_id'); // Добавляем поле user_id
+            $table->foreign('user_id')->references('id')->on('users');
             $table->text('message');
             $table->timestamps();
         });

@@ -13,7 +13,8 @@ class LsMessages extends Model
     protected $fillable = [
         'user_id',
         'to_user_id',
-        'message'
+        'message',
+        'image',
     ];
 
     public function user():BelongsTo

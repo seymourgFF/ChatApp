@@ -7,7 +7,7 @@
 
     <div class="relative flex">
         <input v-model="form.message" type="text"
-               placeholder="Сообщение"
+               placeholder="Message"
                @keyup.enter="sendMessage"
                class="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600
                        placeholder-gray-600 pl-12 bg-gray-200 rounded-full py-3"

@@ -14,16 +14,14 @@ return new class extends Migration
     {
         Schema::create('ls_messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)
-                ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignIdFor(User::class,'to_user_id')
-                ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->text('message');
+            $table->unsignedBigInteger('user_id'); // Добавляем поле user_id
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('to_user_id'); // Добавляем поле user_id
+            $table->foreign('to_user_id')->references('id')->on('users');
+            $table->text('message')->nullable();
+            $table->string('image');
             $table->timestamps();
+            // ->foreign('user_id')->references('id')->on('users');
         });
     }
 
